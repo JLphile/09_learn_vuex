@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import { INCREMENT_N } from './mutation-types';
 const store = createStore({
   state() {
     return {
@@ -23,7 +24,9 @@ const store = createStore({
       state.counter--;
     },
     // payload->{n: 10,name: 'why',age: 18,}
-    incrementN(state, payload) {
+
+    // 字面量增强语法[INCREMENT_N]
+    [INCREMENT_N](state, payload) {
       console.log(payload);
 
       state.counter += payload.n;
