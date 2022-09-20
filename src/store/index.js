@@ -22,6 +22,12 @@ const store = createStore({
     decrement(state) {
       state.counter--;
     },
+    // payload->{n: 10,name: 'why',age: 18,}
+    incrementN(state, payload) {
+      console.log(payload);
+
+      state.counter += payload.n;
+    },
   },
   getters: {
     totalPrice(state, getters) {

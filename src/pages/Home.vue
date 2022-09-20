@@ -1,28 +1,26 @@
 <template>
   <div>
-    <h2>总价值：{{ $store.getters.totalPrice }}</h2>
-    <h2>总价值：{{ $store.getters.totalPriceCountGreaterN(2) }}</h2>
+    <h2>{{ $store.state.counter }}</h2>
     <hr />
-    <h3>{{ nameInfo }}</h3>
-    <h3>{{ ageInfo }}</h3>
-    <h3>{{ heightInfo }}</h3>
-    <hr />
-    <!-- <h3>{{ sNameInfo }}</h3> -->
-    <!-- <h3>{{ sAgeInfo }}</h3>
-    <h3>{{ sHeightInfo }}</h3> -->
+    <button @click="$store.commit('increment')">+1</button>
+    <button @click="$store.commit('decrement')">-1</button>
+    <button @click="addTen">+10</button>
+
     <hr />
   </div>
 </template>
 
 <script>
-import { useGetters } from '../hooks/useGetters';
 export default {
-  setup() {
-    const storeGetters = useGetters(['nameInfo', 'ageInfo', 'heightInfo']);
-    return {
-      // sNameInfo,
-      ...storeGetters,
-    };
+  methods: {
+    addTen() {
+      // this.$store.commit('incrementN', 10);
+      this.$store.commit('incrementN', {
+        n: 10,
+        name: 'why',
+        age: 18,
+      });
+    },
   },
 };
 </script>
