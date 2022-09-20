@@ -7,11 +7,12 @@ const store = createStore({
       age: 18,
       height: 1.88,
       books: [
-        { name: '必修一', price: 100, count: 3 },
+        { name: '必修一', price: 100, count: 2 },
         { name: '必修二', price: 200, count: 3 },
         { name: '必修三', price: 300, count: 3 },
         { name: '必修四', price: 400, count: 3 },
       ],
+      discount: 0.6,
     };
   },
   mutations: {
@@ -23,12 +24,36 @@ const store = createStore({
     },
   },
   getters: {
-    totalPrice(state) {
+    totalPrice(state, getters) {
       let totalPrice = 0;
       for (const book of state.books) {
         totalPrice += book.count * book.price;
       }
-      return totalPrice;
+      return totalPrice * getters.currentDiscount;
+    },
+    currentDiscount(state) {
+      return state.discount * 0.5;
+    },
+    totalPriceCountGreaterN(state, getters) {
+      // 将来totalPriceCountGreaterN返回值是一个函数
+      return function (n) {
+        let totalPrice = 0;
+        for (const book of state.books) {
+          if (book.count > n) {
+            totalPrice += book.count * book.price;
+          }
+        }
+        return totalPrice * getters.currentDiscount;
+      };
+    },
+    nameInfo(state) {
+      return `name:${state.name}`;
+    },
+    ageInfo(state) {
+      return `age:${state.age}`;
+    },
+    heightInfo(state) {
+      return `height:${state.height}`;
     },
   },
 });
