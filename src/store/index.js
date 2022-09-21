@@ -12,6 +12,9 @@ const store = createStore({
     increment(state) {
       state.rootCounter++;
     },
+    decrement(state) {
+      state.rootCounter--;
+    },
   },
   modules: {
     home,
